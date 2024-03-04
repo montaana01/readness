@@ -34,7 +34,7 @@
 
         // Если ошибок нет, можно продолжать дальше с выбранной датой и временем
         if (empty($errorMessage)) {
-          echo "<div class='selected_date'>Выбрана дата и время записи: " . $selectedDate." ".$selectedTime."</div>";
+          echo "<div class='selected_date'>Выбрана дата и время записи: " . $selectedDate." ".date('H:i', strtotime($selectedTime)) ."</div>";
         }
       }
     ?>
