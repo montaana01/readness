@@ -13,11 +13,12 @@
     <?php
       $errorMessage = "";
       $selectedDate = "";
+      $selectedTime = "";
       
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Получаем введенные данные
         $selectedDate = $_POST["date"];
-        $selectedTime = strtotime($_POST["time"]);
+        $selectedTime = $_POST["time"];
 
         // Получаем текущие дату и время
         $currentTime = time();
@@ -33,7 +34,7 @@
 
         // Если ошибок нет, можно продолжать дальше с выбранной датой и временем
         if (empty($errorMessage)) {
-          echo "<div class='selected_date'>Выбрана дата и время записи: " . date('Y-m-d', strtotime($selectedDate)). " " . date('H:i', strtotime($selectedTime)) . "</div>";
+          echo "<div class='selected_date'>Выбрана дата и время записи: " . $selectedDate." ".$selectedTime."</div>";
         }
       }
     ?>
@@ -48,7 +49,11 @@
           $endTime = strtotime('17:15');
           $interval = 15 * 60;
           while ($startTime <= $endTime) {
-            echo '<option value="' . date('H:i', $startTime) . '">' . date('H:i', $startTime) . '</option>';
+            echo '<option value="' . date('H:i', $startTime) . '"';
+            if ($selectedTime === date('H:i', $startTime)) {
+              echo ' selected';
+            }
+            echo '>' . date('H:i', $startTime) . '</option>';
             $startTime += $interval;
           }
         ?>
